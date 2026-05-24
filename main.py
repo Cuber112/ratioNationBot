@@ -38,7 +38,4 @@ async def on_message(message):
 
     await client.process_commands(message)
 
-with open("KEY", 'r') as file:
-    botKey = file.readline()
-
-client.run(botKey)
+client.run(open("KEY").readline())
