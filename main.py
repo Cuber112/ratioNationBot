@@ -42,6 +42,8 @@ def save_memory(memory):
 
 
 def generate_reply(text):
+    if not(random.randint(1,20)==20):
+        return
     memory = load_memory()
     transitions = memory.get("transitions", {})
 
@@ -102,10 +104,9 @@ async def on_message(message):
     if words:
         update_markov_memory(words)
 
-        if not message.content.startswith("!"):
-            reply = generate_reply(message.content)
-            if reply:
-                await message.channel.send(reply)
+    reply = generate_reply(message.content)
+    if reply:
+        await message.channel.send(reply)
 
     await client.process_commands(message)
 
